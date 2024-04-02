@@ -45,44 +45,86 @@ class Funciones {
 
     boolean esPrimo(int n) {
         int divisores = 0;
-            for (int i = 0; i<= n; i++){
+            if (n == 0 || n == 1) {
+                return false;
+            }for (int i = 1; i<= n; i++) {
                 if (n % i == 0) {
                     divisores = divisores + 1;
-                }if (divisores == 3){
-                    return false;
-                }
+            } if (divisores == 3) { 
+                   return false;
             }
-        
+        }
         return true;
     }
-
+    
     int sumatoria(int[] numeros) {
-        // COMPLETAR
-        return 0;
+        int res = 0;
+            for (int i = 0; i<numeros.length; i++) {
+                res = res + numeros[i];
+            }
+        return res;
     }
 
     int busqueda(int[] numeros, int buscado) {
-        // COMPLETAR
-        return 0;
+        int res = -1;
+        for (int i = 0; i<numeros.length; i++) {
+            if (numeros[i] == buscado){
+                res = i;
+            }
+        }
+        return res;
     }
 
     boolean tienePrimo(int[] numeros) {
-        // COMPLETAR
+        for (int i=0; i<numeros.length; i++){
+            if (esPrimo(numeros[i]) == true){
+                return true;
+            }
+        }
         return false;
     }
 
     boolean todosPares(int[] numeros) {
-        // COMPLETAR
-        return false;
+            for(int i=0; i<numeros.length; i++){
+                if(!(numeros[i] % 2 == 0)){
+                    return false;
+            }
+        }
+        return true;
     }
 
     boolean esPrefijo(String s1, String s2) {
-        // COMPLETAR
-        return false;
+        boolean res = true;
+        if(s2.length() < s1.length()){
+            res = false;
+        }        
+        else{
+            for (int i=0; i<s1.length(); i++){
+                if (!(s1.charAt(i) == s2.charAt(i))){
+                    res = false;
+                }
+            }
+        }
+        return res;
     }
 
     boolean esSufijo(String s1, String s2) {
-        // COMPLETAR
-        return false;
+        boolean res = true;
+        if (s1.length()>s2.length()){
+            res = false;
+        }
+        else{
+            String s2DadoVuelta = "";
+            for (int n = (s2.length()-1); n>=0; n = n-1){
+                s2DadoVuelta = s2DadoVuelta + (s2.charAt(n));
+            }
+            String s1DadoVuelta = "";
+            for (int i = (s1.length()-1); i >= 0; i = i -1){
+            s1DadoVuelta = s1DadoVuelta + (s1.charAt(i));
+            }
+            res = esPrefijo(s1DadoVuelta , s2DadoVuelta);
+            }     
+        return res;
     }
+
 }
