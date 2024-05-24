@@ -1,38 +1,42 @@
 package aed;
 
+import java.util.ArrayList;
+
 class ArregloRedimensionableDeRecordatorios implements SecuenciaDeRecordatorios {
 
+    private ArrayList<Recordatorio> arrayrecordatorios;
+
     public ArregloRedimensionableDeRecordatorios() {
-        throw new UnsupportedOperationException("No implementada aun");
+        arrayrecordatorios = new ArrayList<>();
     }
 
     public ArregloRedimensionableDeRecordatorios(ArregloRedimensionableDeRecordatorios vector) {
-        throw new UnsupportedOperationException("No implementada aun");
+        arrayrecordatorios = new ArrayList<>(vector.arrayrecordatorios);
     }
 
     public int longitud() {
-        throw new UnsupportedOperationException("No implementada aun");
+        return arrayrecordatorios.size();
     }
 
     public void agregarAtras(Recordatorio i) {
-        throw new UnsupportedOperationException("No implementada aun");
+        arrayrecordatorios.add(i);
     }
 
     public Recordatorio obtener(int i) {
-        throw new UnsupportedOperationException("No implementada aun");
+        return this.arrayrecordatorios.get(i); 
     }
 
     public void quitarAtras() {
-        throw new UnsupportedOperationException("No implementada aun");
+        arrayrecordatorios.remove(arrayrecordatorios.size() - 1);
     }
 
     public void modificarPosicion(int indice, Recordatorio valor) {
-        throw new UnsupportedOperationException("No implementada aun");
-
+        this.arrayrecordatorios.set(indice, valor);
     }
 
     public ArregloRedimensionableDeRecordatorios copiar() {
-        throw new UnsupportedOperationException("No implementada aun");
+        ArregloRedimensionableDeRecordatorios CopiaArreglo = new ArregloRedimensionableDeRecordatorios(this);
+        return CopiaArreglo;
     }
 
 }
