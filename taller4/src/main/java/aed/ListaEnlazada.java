@@ -45,12 +45,23 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     }
 
     public ListaEnlazada(ListaEnlazada<T> lista) {
-        throw new UnsupportedOperationException("No implementada aun");
+        this.lista = new LinkedList<>();
+        for (int i = 0; i < lista.longitud(); i++) {
+            this.lista.add(lista.obtener(i));
+        }
     }
-    
+     
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("No implementada aun");
+        StringBuffer sbuffer = new StringBuffer();
+        sbuffer.append("[");
+        for (int i=0; i<lista.size()-1; i++){
+        sbuffer.append(lista.get(i));
+        sbuffer.append(", ");
+        }
+        sbuffer.append(lista.get(lista.size()-1));
+        sbuffer.append("]");
+        return sbuffer.toString();
     }
 
     private class ListaIterador implements Iterador<T> {
