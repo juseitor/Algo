@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Horario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">labo2</a> &gt; <a href="index.source.html" class="el_package">aed</a> &gt; <span class="el_source">Horario.java</span></div><h1>Horario.java</h1><pre class="source lang-java linenums">package aed;
+
+public class Horario {
+
+    private int _hrs;
+    private int _mins;
+
+<span class="fc" id="L8">    public Horario(int hora, int minutos) {</span>
+<span class="fc" id="L9">        _hrs = hora;</span>
+<span class="fc" id="L10">        _mins = minutos;</span>
+<span class="fc" id="L11">    }</span>
+
+    public int hora() {
+<span class="fc" id="L14">        return _hrs;</span>
+    }
+
+    public int minutos() {
+<span class="fc" id="L18">        return _mins;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L23">        StringBuffer sBuffer = new StringBuffer();</span>
+<span class="fc" id="L24">        sBuffer.append(_hrs + &quot;:&quot; + _mins);</span>
+<span class="fc" id="L25">        return sBuffer.toString();</span>
+    }
+
+    @Override
+    public boolean equals(Object otro) {
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        boolean otroEsNull = (otro == null);</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        boolean esDeOtraClase = (otro.getClass() != this.getClass());</span>
+<span class="pc bpc" id="L32" title="1 of 4 branches missed.">        if (otroEsNull || esDeOtraClase){</span>
+<span class="fc" id="L33">            return false;</span>
+        }else{
+<span class="fc" id="L35">            Horario otroHorario = (Horario) otro;</span>
+<span class="fc bfc" id="L36" title="All 4 branches covered.">            return _hrs == otroHorario.hora() &amp;&amp; _mins == otroHorario.minutos();</span>
+            // o se podria escribir así: &quot;return  Objects.equals(this.hora(), otroHorario.hora()) &amp;&amp; Objects.equals(this.minutos(), otroHorario.minutos());&quot;
+        }
+    }
+
+    public static void main(String[] args) {
+<span class="nc" id="L42">        Horario H = new Horario(23, 50);</span>
+<span class="nc" id="L43">        System.out.println(H);</span>
+<span class="nc" id="L44">        System.out.println(&quot;Hora: &quot; + H.hora());</span>
+<span class="nc" id="L45">        System.out.println(&quot;Minuto: &quot; + H.minutos());</span>
+<span class="nc" id="L46">        System.out.println(&quot;resultade toString() &quot; + H.toString());</span>
+<span class="nc" id="L47">        Horario H2 = new Horario(23, 50);</span>
+<span class="nc" id="L48">        System.out.println(&quot;resultado equals &quot; + H.equals(H2));</span>
+
+<span class="nc" id="L50">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
