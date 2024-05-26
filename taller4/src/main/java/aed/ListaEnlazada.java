@@ -73,7 +73,7 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     }
 
     public void eliminar(int i) {
-        lista.remove(i);
+        lista.remove(i); 
 //        Nodo nodoAEliminar = null;
 //        if (i == 0) { // Eliminar el primer nodo
 //            nodoAEliminar = primerNodo;
