@@ -9,7 +9,6 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
 
     private Nodo _raiz;
     private int _cardinal;
-    private int _altura;
 
     private class Nodo {
         // Agregar atributos privados del Nodo
@@ -29,7 +28,6 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     public ABB() {
         this._raiz = null;
         this._cardinal = 0;
-        this._altura = 0;
     }
 
     public int cardinal() {
@@ -118,17 +116,32 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     }
 
     public boolean busquedaRecursiva(T elem, Nodo actual) {
-        if (actual == null) {
+        if (actual == null){
             return false;
-        } if (actual.dato == elem){
+        }
+
+        if (actual.dato.equals(elem)){
             return true;
         }
-        if (actual.dato.compareTo(elem) > 0){
+        // el parentesis de abajo es la unica diferencia con el punto hecho nota de abajo, y si no hago eso no funciona
+        if ((actual.dato).compareTo(elem) > 0){
             return busquedaRecursiva(elem, actual.izq);
-        } else {
+        } 
+        else{
             return busquedaRecursiva(elem, actual.der);
         }
     }
+//        if (actual == null) {
+//            return false;
+//        } if (actual.dato == elem){
+//            return true;
+//        }
+//        if (actual.dato.compareTo(elem) > 0){
+//            return busquedaRecursiva(elem, actual.izq);
+//        } else {
+//            return busquedaRecursiva(elem, actual.der);
+//        }
+//    }
 
     public void eliminar(T elem){
         // busqueda
@@ -193,18 +206,81 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     }
 
     public String toString(){
-        throw new UnsupportedOperationException("No implementada aun");
+        Nodo aux = _raiz;
+        String res = "{";
+        res = res + stringInOrder(aux);
+        res = res + "}";
+        return res; 
+    }
+
+    private String stringInOrder(Nodo aux) {
+        if (aux == null) {
+            return "";
+        }
+        String izquierda = stringInOrder(aux.izq);
+        String derecha = stringInOrder(aux.der);
+        // el isEmpty, si el string esta vacio es porque es el primer elemento, y entonces no pone coma
+        return izquierda + (izquierda.isEmpty() ? "" : ",") + aux.dato.toString() + (derecha.isEmpty() ? "" : ",") + derecha;
     }
 
     private class ABB_Iterador implements Iterador<T> {
-        private Nodo _actual;
+    //     private Nodo _actual;
+    //     private Stack<Nodo> stack; //para guardar elementos
 
-        public boolean haySiguiente() {            
-            throw new UnsupportedOperationException("No implementada aun");
-        }
+    //     public void ABB_iterador(){
+    //         _actual = _raiz;
+    //         stack = new Stack<Nodo>();
+    //         Nodo aux = _actual;
+    //         cargarDatosInOrder(aux);
+    //     }
+
+    //     private void cargarDatosInOrder(Nodo x) {
+    //         if (x != null) {
+    //             cargarDatosInOrder(x.der);
+    //             stack.push(x);
+    //             cargarDatosInOrder(x.izq);
+    //         }
+    //     }
+
+    //     public boolean haySiguiente() {            
+    //         return !(stack.isEmpty());
+    //     }
     
-        public T siguiente() {
-            throw new UnsupportedOperationException("No implementada aun");
+    //     public T siguiente() {
+    //         if (!haySiguiente()) {
+    //             return null;
+    //         }
+    //         Nodo siguiente = stack.pop();
+    //         return siguiente.dato;
+    //     }
+        private Nodo actual;
+        private Stack<Nodo> stack; //vamos a ir guardando todos los elementos aca ya que es facil para sacarlos
+        
+        public ABB_Iterador(){
+            actual = _raiz;
+            stack = new Stack<Nodo>();
+            Nodo aux = actual;
+            cargarDatosInOrder(aux);
+        }
+
+        private void cargarDatosInOrder(Nodo x){
+            if (x != null){
+                cargarDatosInOrder(x.der);
+                stack.push(x);
+                cargarDatosInOrder(x.izq);
+            }
+        }
+
+        public boolean haySiguiente() {        
+            return !(stack.isEmpty());
+        }
+
+        public T siguiente(){ 
+            if (!haySiguiente()){
+                return null;
+            }
+            Nodo siguiente = stack.pop();
+            return siguiente.dato;
         }
     }
 
